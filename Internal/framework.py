@@ -5,6 +5,7 @@ from scipy.io import wavfile
 import os
 
 from Internal.functions import *
+import requests
 
 class Interface:
     def __init__(self):
@@ -70,14 +71,20 @@ class Interface:
         
         print("Recording finished.")
 
-        stream.stop_stream()
-        stream.close()
+        try:
 
-        p.terminate()
+            stream.stop_stream()
+            stream.close()
 
-        wf = wave.open(self.filename, 'wb')
-        wf.setnchannels(self.channels)
-        wf.setsampwidth(p.get_sample_size(self.sample_format))
-        wf.setframerate(self.fs)
-        wf.writeframes(b''.join(frames))
-        wf.close()
+            p.terminate()
+
+            wf = wave.open(self.filename, 'wb')
+            wf.setnchannels(self.channels)
+            wf.setsampwidth(p.get_sample_size(self.sample_format))
+            wf.setframerate(self.fs)
+            wf.writeframes(b''.join(frames))
+            wf.close()
+        
+        except Exception as e:
+            with open("./logs/error", "w") as f:
+                f.write(Exception)

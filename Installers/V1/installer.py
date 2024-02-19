@@ -12,9 +12,9 @@ class Downloader:
 
     def install_dependencies(self):
         commands = [
-            "cd ~/.NLU-Application && mkdir -p Virtual_Environment",
-            "cd ~/.NLU-Application/Virtual_Environment && python3 -m venv NLU_VE",
-            "python3 ~/.NLU-Application/Virtual_Environment/NLU_VE/bin/pip install -r ~/.NLU-Application/Setup/requirements.txt"
+            "cd ~/.Janex-Assistant-Frontend && mkdir -p Virtual_Environment",
+            "cd ~/.Janex-Assistant-Frontend/Virtual_Environment && python3 -m venv NLU_VE",
+            "python3 ~/.Janex-Assistant-Frontend/Virtual_Environment/NLU_VE/bin/pip install -r ~/.Janex-Assistant-Frontend/Setup/requirements.txt"
         ]
 
         # Execute the commands
@@ -22,16 +22,16 @@ class Downloader:
             subprocess.run(cmd, shell=True, executable="/bin/bash")
     
     def create_desktop_entry(self):
-        os.system("cd ~ && wget https://github.com/ChronoByte404/NLU-Application/raw/main/Installers/Launcher.program")
-        subprocess.run(f"sudo chmod +x ~/.NLU-Application/Installers/Launcher.program", shell=True, check=True)
+        os.system("cd ~ && wget https://github.com/ChronoByte404/Janex-Assistant-Frontend/raw/main/Installers/Launcher.program")
+        subprocess.run(f"sudo chmod +x ~/.Janex-Assistant-Frontend/Installers/Launcher.program", shell=True, check=True)
         desktop_entry = f'''[Desktop Entry]
 Name=NLU Assistant
-Exec="~/.NLU-Application/Installers/Launcher.program"
+Exec="~/.Janex-Assistant-Frontend/Installers/Launcher.program"
 Icon={os.path.join(self.installation_directory, 'images', 'icon.png')}
 Type=Application
 Categories=Utility;'''
 
-        desktop_path = os.path.join(os.environ['HOME'], '.local', 'share', 'applications', 'NLU-Application.desktop')
+        desktop_path = os.path.join(os.environ['HOME'], '.local', 'share', 'applications', 'Janex-Assistant-Frontend.desktop')
 
         with open(desktop_path, 'w') as desktop_file:
             desktop_file.write(desktop_entry)
@@ -45,10 +45,10 @@ Categories=Utility;'''
                 shutil.rmtree(self.installation_directory)
 
             print("Downloading zip.")
-            os.system(f"cd {self.download_directory} && wget https://github.com/ChronoByte404/NLU-Application/archive/refs/heads/main.zip -O NLU-Application.zip")
+            os.system(f"cd {self.download_directory} && wget https://github.com/ChronoByte404/Janex-Assistant-Frontend/archive/refs/heads/main.zip -O Janex-Assistant-Frontend.zip")
 
             print("Extracting zip.")
-            os.system(f"unzip -o {self.download_directory}/NLU-Application.zip -d ~/ && cd ~/ && mv -f ./NLU-Application-main ./.NLU-Application")
+            os.system(f"unzip -o {self.download_directory}/Janex-Assistant-Frontend.zip -d ~/ && cd ~/ && mv -f ./Janex-Assistant-Frontend-main ./.Janex-Assistant-Frontend")
 
             print("Creating executable.")
 
@@ -81,7 +81,7 @@ class App:
 
     def create_widgets(self):
         # Entry widget for directory
-        default_directory = '~/.NLU-Application'
+        default_directory = '~/.Janex-Assistant-Frontend'
         self.directory_entry = tk.Entry(self.root, bg="#ffffff", fg="#333333", justify="center")
         self.directory_entry.insert(tk.END, default_directory)
         self.directory_entry.place(x=30, y=90, width=260, height=30)
@@ -96,7 +96,7 @@ class App:
         install_button.place(x=220, y=190, width=71, height=30)
 
         # Label
-        label = tk.Label(self.root, text="Install your own NLU Personal Assistant", fg="#333333", justify="center")
+        label = tk.Label(self.root, text="Install your own Janex Personal Assistant", fg="#333333", justify="center")
         label.place(x=30, y=30, width=280, height=30)
 
     def install_action(self):

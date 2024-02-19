@@ -1,4 +1,3 @@
-
 git+https://github.com/ChronoByte404/whisper.git
 JanexPT
 JanexBot

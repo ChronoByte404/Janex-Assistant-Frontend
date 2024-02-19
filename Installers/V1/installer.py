@@ -9,17 +9,24 @@ class Downloader:
     def __init__(self, download_directory, installation_directory):
         self.download_directory = download_directory
         self.installation_directory = installation_directory
-        self.version = "0.0.6"
 
     def install_dependencies(self):
-        os.system("cd ~/.NLU-Application && mkdir ./Settings && cd Virtual_Environment && python3 -m venv NLU_VE && source NLU_VE/bin/activate && cd .. && python3 -m pip install -r Setup/requirements.txt")
+        commands = [
+            "cd ~/.NLU-Application && mkdir -p Virtual_Environment",
+            "cd ~/.NLU-Application/Virtual_Environment && python3 -m venv NLU_VE",
+            "python3 ~/.NLU-Application/Virtual_Environment/NLU_VE/bin/pip install -r Setup/requirements.txt"
+        ]
 
+        # Execute the commands
+        for cmd in commands:
+            subprocess.run(cmd, shell=True, executable="/bin/bash")
+    
     def create_desktop_entry(self):
         os.system("cd ~ && wget https://github.com/ChronoByte404/NLU-Application/raw/main/Installers/Launcher.program")
         subprocess.run(f"sudo chmod +x ~/.NLU-Application/Installers/Launcher.program", shell=True, check=True)
         desktop_entry = f'''[Desktop Entry]
 Name=NLU Assistant
-Exec="~/NLU-Application/Launcher.program"
+Exec="~/.NLU-Application/Installers/Launcher.program"
 Icon={os.path.join(self.installation_directory, 'images', 'icon.png')}
 Type=Application
 Categories=Utility;'''
@@ -44,18 +51,17 @@ Categories=Utility;'''
                             os.remove(item_path)
 
             print("Downloading zip.")
-            os.system(f"cd {self.download_directory} && wget https://github.com/ChronoByte404/NLU-Application/archive/refs/tags/{self.version}.zip -O NLU-Application.zip")
+            os.system(f"cd {self.download_directory} && wget https://github.com/ChronoByte404/NLU-Application/archive/refs/heads/main.zip -O NLU-Application.zip")
 
             print("Extracting zip.")
-            os.system(f"unzip {self.download_directory}/NLU-Application.zip -d {self.download_directory}")
-
-            print("Moving contents.")
-            os.system(f"mkdir -p {self.installation_directory}")
-            os.system(f"mv {self.download_directory}/NLU-Application-{self.version}/* {self.installation_directory}")
+            os.system(f"unzip {self.download_directory}/NLU-Application.zip -d ~/ && cd ~/ && mv ./NLU-Application-main ./.NLU-Application")
 
             print("Creating executable.")
 
             NLUAssistantInfo = ""
+
+            print("Installing dependencies and configuring virtual environment.")
+            self.install_dependencies()
 
             messagebox.showinfo("Installation Complete", "NLU Personal Assistant has been installed successfully!")
             self.create_desktop_entry()  # Call to create desktop entry

@@ -11,3 +11,4 @@ psutil
 colorama
 scipy
 numpy
+PyQt5

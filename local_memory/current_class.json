@@ -1,1 +1,1 @@
-{"response": "Resuming music.", "intent_class": {"tag": "play-music", "patterns": ["play music", "resume music", "music resumed", "music playing", "playing music", "resuming music", "play media", "start the media"], "responses": ["Playing music...", "Resuming music.", "Music is now playing."], "context": "command"}}
+{"response": "You're welcome!", "intent_class": {"tag": "thank-you", "patterns": ["Thank you", "Thanks", "Appreciate it"], "responses": ["You're welcome!", "No problem!", "You got it!"], "context": "small-talk"}}

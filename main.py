@@ -35,24 +35,32 @@ class MyWindow(QMainWindow):
             self.mode = "text"
         elif mode_text == "Audio":
             self.mode = "audio"
+        self.text_edit.append(f"{Config.get('UIName')}: Communication mode switched to {mode_text}")
 
     def handle_input(self):
         text = self.input_field.text()
         self.text_edit.append(f"You: {text}")
         self.input_field.clear()  # Clear the input field
 
-        if self.mode == "audio":
-            # Handle audio input
+        self.process_input(text)
+
+    def audio_mode(self):
+        while self.mode.lower() == "audio":
             try:
                 Instance.VoiceCommand()
                 ResponseOutput, intent_class = Instance.send_audio()
                 DoFunction(intent_class)
                 tts(ResponseOutput)
+                # Update GUI using signal
                 self.text_edit.append(f"{Config.get('UIName')}: {ResponseOutput}")
             except Exception as e:
                 print(f"Error: {e}")
                 quit()
-                
+    
+    def process_input(self, text):
+        if self.mode == "audio":
+            threading.Thread(target=self.audio_mode).start()
+
         elif self.mode == "text":
             # Handle text input
             try:
@@ -101,7 +109,11 @@ class ModeDialog(QDialog):
         return self.selected_mode
 
 if __name__ == "__main__":
+    
     app = QApplication(sys.argv)
     window = MyWindow()
+    if len(sys.argv) > 1:
+        mode = sys.argv[1]
+        window.mode = mode
     window.show()
     sys.exit(app.exec_())

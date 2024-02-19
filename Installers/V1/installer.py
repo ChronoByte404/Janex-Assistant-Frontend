@@ -14,7 +14,7 @@ class Downloader:
         commands = [
             "cd ~/.NLU-Application && mkdir -p Virtual_Environment",
             "cd ~/.NLU-Application/Virtual_Environment && python3 -m venv NLU_VE",
-            "python3 ~/.NLU-Application/Virtual_Environment/NLU_VE/bin/pip install -r Setup/requirements.txt"
+            "python3 ~/.NLU-Application/Virtual_Environment/NLU_VE/bin/pip install -r ~/.NLU-Application/Setup/requirements.txt"
         ]
 
         # Execute the commands
@@ -40,21 +40,15 @@ Categories=Utility;'''
 
     def download_and_extract(self):
         try:
+            print("Removing existing installation (excluding Settings folder).")
             if os.path.exists(self.installation_directory):
-                print("Removing existing installation (excluding Settings folder).")
-                for item in os.listdir(self.installation_directory):
-                    if item != "Settings":
-                        item_path = os.path.join(self.installation_directory, item)
-                        if os.path.isdir(item_path):
-                            shutil.rmtree(item_path)
-                        else:
-                            os.remove(item_path)
+                shutil.rmtree(self.installation_directory)
 
             print("Downloading zip.")
             os.system(f"cd {self.download_directory} && wget https://github.com/ChronoByte404/NLU-Application/archive/refs/heads/main.zip -O NLU-Application.zip")
 
             print("Extracting zip.")
-            os.system(f"unzip {self.download_directory}/NLU-Application.zip -d ~/ && cd ~/ && mv ./NLU-Application-main ./.NLU-Application")
+            os.system(f"unzip -o {self.download_directory}/NLU-Application.zip -d ~/ && cd ~/ && mv -f ./NLU-Application-main ./.NLU-Application")
 
             print("Creating executable.")
 
@@ -68,6 +62,7 @@ Categories=Utility;'''
             sys.exit()
         except Exception as e:
             messagebox.showerror("Installation Failed", f"An error occurred during installation: {str(e)}")
+
 
 class App:
     def __init__(self, root):

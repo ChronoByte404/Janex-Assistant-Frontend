@@ -44,7 +44,7 @@ Categories=Utility;'''
                             os.remove(item_path)
 
             print("Downloading zip.")
-            os.system(f"cd {self.download_directory} && wget https://github.com/ChronoByte404/NLU-Application/archive/refs/tags/v{self.version}.zip -O NLU-Application.zip")
+            os.system(f"cd {self.download_directory} && wget https://github.com/ChronoByte404/NLU-Application/archive/refs/tags/{self.version}.zip -O NLU-Application.zip")
 
             print("Extracting zip.")
             os.system(f"unzip {self.download_directory}/NLU-Application.zip -d {self.download_directory}")

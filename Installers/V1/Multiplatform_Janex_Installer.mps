@@ -24,7 +24,7 @@ class Downloader:
     def create_desktop_entry(self):
         if sys.platform.startswith('linux'):
             print("Linux-based Operating System Detected.")
-            os.system("wget -P ~/Downloads/ https://github.com/ChronoByte404/Janex-Assistant-Frontend/raw/main/Installers/Janex_Launcher_Ubuntu.program")
+            os.system("wget -P ~/ https://github.com/ChronoByte404/Janex-Assistant-Frontend/raw/main/Installers/Janex_Launcher_Ubuntu.program")
             subprocess.run(["chmod", "+x", os.path.expanduser("~/Downloads/Janex_Launcher_Ubuntu.program")], check=True)
             desktop_entry = f'''[Desktop Entry]
     Name=NLU Assistant

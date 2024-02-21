@@ -2,7 +2,7 @@ from Internal.framework import *
 from Internal.functions import *
 
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLineEdit, QPushButton, QDialog, QVBoxLayout, QComboBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLineEdit, QPushButton, QDialog, QVBoxLayout, QComboBox, QMessageBox
 
 Instance = Interface()
 Config = loadconfig("./Settings/config.json")
@@ -54,8 +54,10 @@ class MyWindow(QMainWindow):
                 # Update GUI using signal
                 self.text_edit.append(f"{Config.get('UIName')}: {ResponseOutput}")
             except Exception as e:
-                print(f"Error: {e}")
-                quit()
+                error_message = f"Error: {e}"
+                print(error_message)
+                QMessageBox.critical(self, "Error", error_message)
+                break  # Exit the loop on error
     
     def process_input(self, text):
         if self.mode == "audio":
@@ -71,7 +73,9 @@ class MyWindow(QMainWindow):
                 tts(ResponseOutput)
                 self.text_edit.append(f"{Config.get('UIName')}: {ResponseOutput}")
             except Exception as e:
-                print(f"Error: {e}")
+                error_message = f"Error: {e}"
+                print(error_message)
+                QMessageBox.critical(self, "Error", error_message)
         
     def select_mode(self):
         mode_dialog = ModeDialog(self)

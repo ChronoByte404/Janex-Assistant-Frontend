@@ -1,13 +1,23 @@
 import json
 import os
 import sys
-import webbrowser
 import threading
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 import psutil
 import signal
 import sys
+
+class WebInterface:
+    def __init__(self):
+        self.jean = "NotX"
+    
+    def open(self, website):
+        if "http" not in website:
+            website = f"http://{website}"
+        run_cprogram(f'./Scripts/open_website {website}')
+
+webbrowser = WebInterface()
 
 def run_cprogram(path):
     if "./" not in path:
@@ -276,10 +286,10 @@ def maxvol():
         os.system("osascript -e 'set Volume 10'")
 
 def speak(ResponseOutput):
-    cprogram(f'./Utilities/tts "{ResponseOutput}"')
+    run_cprogram(f'./Utilities/tts "{ResponseOutput}"')
 
 def save_speak(ResponseOutput):
-    cprogram(f'./Utilities/tts_to_file "{ResponseOutput}"')
+    run_cprogram(f'./Utilities/tts_to_file "{ResponseOutput}"')
 
 def tts(ResponseOutput):
     threading.Thread(target=speak, args=(ResponseOutput,)).start()

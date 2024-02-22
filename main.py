@@ -1,5 +1,6 @@
 from Internal.framework import *
 from Internal.functions import *
+from backgroundstuff.alarm_client import *
 
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLineEdit, QPushButton, QDialog, QVBoxLayout, QComboBox, QMessageBox
@@ -113,7 +114,7 @@ class ModeDialog(QDialog):
         return self.selected_mode
 
 if __name__ == "__main__":
-    
+    threading.Thread(target=send_request_in_background).start()
     app = QApplication(sys.argv)
     window = MyWindow()
     if len(sys.argv) > 1:

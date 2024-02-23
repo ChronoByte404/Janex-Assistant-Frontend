@@ -25,10 +25,9 @@ class Downloader:
         if sys.platform.startswith('linux'):
             print("Linux-based Operating System Detected.")
             os.system("wget -P ~/ https://github.com/ChronoByte404/Janex-Assistant-Frontend/raw/main/Installers/Janex_Launcher_Ubuntu.program")
-            subprocess.run(["chmod", "+x", os.path.expanduser("~/Janex_Launcher_Ubuntu.program")], check=True)
             desktop_entry = f'''[Desktop Entry]
     Name=NLU Assistant
-    Exec={os.path.expanduser("~/Downloads/Janex_Launcher_Ubuntu.program")}
+    Exec={os.path.expanduser("~/Janex_Launcher_Ubuntu.program")}
     Icon={os.path.join(self.installation_directory, 'images', 'icon.png')}
     Type=Application
     Categories=Utility;'''

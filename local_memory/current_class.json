@@ -1,1 +1,1 @@
-{"response": "Pausing the music...", "intent_class": {"tag": "pause-music", "patterns": ["Pause music", "Stop music", "Pausing music", "Stopping the music", "pause music", "cutting music", "kill music", "pause media", "stop the media"], "responses": ["Pausing the music...", "Stopping the music.", "Music is now paused."], "context": "command"}}
+{"response": "Hello!", "intent_class": {"tag": "greet", "patterns": ["Hi", "Hello", "Hey", "Greetings"], "responses": ["Hello!", "Hi there!", "Hey!", "Greetings!"], "context": "small-talk"}}

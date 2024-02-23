@@ -12,3 +12,4 @@ colorama
 scipy
 numpy
 PyQt5
+pyaudio

@@ -14,13 +14,13 @@ class Downloader:
         commands = [
             "cd ~/.Janex-Assistant-Frontend && mkdir -p Virtual_Environment",
             "cd ~/.Janex-Assistant-Frontend/Virtual_Environment && python3 -m venv NLU_VE",
-            "python3 ~/.Janex-Assistant-Frontend/Virtual_Environment/NLU_VE/bin/pip install -r ~/.Janex-Assistant-Frontend/Setup/requirements.txt"
+            ". .Janex-Assistant-Frontend/Virtual_Environment/NLU_VE/bin/activate && python3 ~/.Janex-Assistant-Frontend/Virtual_Environment/NLU_VE/bin/pip install -r ~/.Janex-Assistant-Frontend/Setup/requirements.txt"
         ]
 
         # Execute the commands
         for cmd in commands:
             subprocess.run(cmd, shell=True, executable="/bin/bash")
-    
+
     def create_desktop_entry(self):
         if sys.platform.startswith('linux'):
             print("Linux-based Operating System Detected.")
@@ -37,7 +37,7 @@ class Downloader:
             print("Windows Operating System Detected.")
             os.system("wget -P C:/Temp/ https://github.com/ChronoByte404/Janex-Assistant-Frontend/raw/main/Installers/Janex_Launcher_Windows.exe")
             # No need for chmod on Windows
-            
+
             desktop_entry = ''  # No desktop entry for Windows currently
 
         else:

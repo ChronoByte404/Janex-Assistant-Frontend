@@ -84,7 +84,6 @@ The Janex NLU Personal Assistant Installer script automates the installation pro
 1. **Download the Script:** Download the `install_janex.py` script from the repository.
 2. **Run the Script:**
    - Execute the script using Python 3.
-   - Ensure Tkinter library is installed (`sudo apt-get install python3-tk` for Linux).
 3. **User Interface:**
    - The script launches a GUI window titled "NLU Personal Assistant - Installer".
    - Enter the desired installation directory in the provided field.

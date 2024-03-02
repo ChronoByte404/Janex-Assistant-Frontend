@@ -21,6 +21,8 @@ class Interface:
     
     def send(self, text):
         os.system(f'./Scripts/send_request {self.config.get("IP")} "{text}"')
+        with open("./short_term_memory/user_input.txt", "w") as file:
+            file.write(text)
     
     def send_audio(self):
         url = self.config.get("SecondIP")
@@ -31,6 +33,9 @@ class Interface:
             
             ResponseOutput = response_data.get("ResponseOutput")
             intent_class = response_data.get("intent_class")
+
+            with open("./short_term_memory/user_input.txt", "w") as file:
+                file.write(ResponseOutput)
 
             return ResponseOutput, intent_class
         else:

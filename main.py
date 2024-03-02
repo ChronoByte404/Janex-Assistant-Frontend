@@ -1,5 +1,5 @@
 from Internal.framework import *
-from Internal.functions import *
+from Utilities.functions import *
 from backgroundstuff.alarm_client import *
 
 import sys

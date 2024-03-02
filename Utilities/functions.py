@@ -28,7 +28,7 @@ def cprogram(path):
     threading.Thread(target=run_cprogram, args=(path,)).start()
 
 def sherlock(args):
-    run_cprogram(f'./Scripts/sherlock {args}')
+    os.system(f'./Scripts/sherlock {args}')
 
 def timed_shutdown():
     print("59 minute timed shutdown active.")
@@ -103,10 +103,6 @@ def check_os():
 OS = check_os()
 
 def DeployFunction(intent_class):
-    with open("short_term_memory/user_input.txt", "r") as file:
-        InputText = file.read()
-    
-    intent_patterns = intent_class.get("patterns")
     play_sound_in_background("AudioFiles/speechunderstood.mp3")
     intent_class = intent_class.get("tag")
     print(intent_class)
@@ -170,11 +166,19 @@ def DeployFunction(intent_class):
         settings["colour"] = "RED"
         saveconfig("./Settings/configuration.json", settings)
     
+    # Sherlock
+
     elif intent_class == "sherlock":
-        for pattern in intent_patterns:
-            if pattern in InputText:
-                InputText = InputText.replace(pattern, "")
-        sherlock(InputText)
+        with open("short_term_memory/user_input.txt", "r") as file:
+            usrinput = file.read()
+        currentclass = loadconfig("local_memory/current_class.json")
+        currentclass = currentclass.get("intent_class")
+        patterns = currentclass["patterns"]
+
+        for pattern in patterns:
+            usrinput = usrinput.replace(pattern, "")
+        
+        run_cprogram(f"./Scripts/sherlock {usrinput}")
 
 # Website functions
 
@@ -299,9 +303,17 @@ def maxvol():
         os.system("osascript -e 'set Volume 10'")
 
 def speak(ResponseOutput):
+    words = loadconfig("./Personality/pronounciation.json")
+    for word in words["words"]:
+        if word.get("word") in ResponseOutput:
+            ResponseOutput = ResponseOutput.replace(word.get("word"), word.get("pronounce"))
     run_cprogram(f'./Utilities/tts "{ResponseOutput}"')
 
 def save_speak(ResponseOutput):
+    words = loadconfig("./Personality/pronounciation.json")
+    for word in words["words"]:
+        if word.get("word") in ResponseOutput:
+            ResponseOutput = ResponseOutput.replace(word.get("word"), word.get("pronounce"))
     run_cprogram(f'./Utilities/tts_to_file "{ResponseOutput}"')
 
 def tts(ResponseOutput):

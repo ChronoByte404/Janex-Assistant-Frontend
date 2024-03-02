@@ -4,7 +4,7 @@ import numpy as np
 from scipy.io import wavfile
 import os
 
-from Internal.functions import *
+from Utilities.functions import *
 import requests
 
 class Interface:

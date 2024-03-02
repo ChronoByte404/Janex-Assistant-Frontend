@@ -772,9 +772,9 @@ def main():
             # The usernames results should be stored in a targeted folder.
             # If the folder doesn't exist, create it first
             os.makedirs(args.folderoutput, exist_ok=True)
-            result_file = os.path.join(args.folderoutput, f"{username}.txt")
+            result_file = f"../textoutput/{username}.txt"
         else:
-            result_file = f"{username}.txt"
+            result_file = f"../textoutput/{username}.txt"
 
         with open(result_file, "w", encoding="utf-8") as file:
             exists_counter = 0

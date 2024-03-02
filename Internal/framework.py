@@ -35,7 +35,7 @@ class Interface:
             intent_class = response_data.get("intent_class")
 
             with open("./short_term_memory/user_input.txt", "w") as file:
-                file.write(ResponseOutput)
+                file.write("None")
 
             return ResponseOutput, intent_class
         else:

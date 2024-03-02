@@ -103,6 +103,10 @@ def check_os():
 OS = check_os()
 
 def DeployFunction(intent_class):
+    with open("short_term_memory/user_input.txt", "r") as file:
+        InputText = file.read()
+    
+    intent_patterns = intent_class.get("patterns")
     play_sound_in_background("AudioFiles/speechunderstood.mp3")
     intent_class = intent_class.get("tag")
     print(intent_class)
@@ -167,7 +171,10 @@ def DeployFunction(intent_class):
         saveconfig("./Settings/configuration.json", settings)
     
     elif intent_class == "sherlock":
-        sherlock()
+        for pattern in intent_patterns:
+            if pattern in InputText:
+                InputText = InputText.replace(pattern, "")
+        sherlock(InputText)
 
 # Website functions
 

@@ -27,6 +27,9 @@ def run_cprogram(path):
 def cprogram(path):
     threading.Thread(target=run_cprogram, args=(path,)).start()
 
+def sherlock(args):
+    run_cprogram(f'./Scripts/sherlock {args}')
+
 def timed_shutdown():
     print("59 minute timed shutdown active.")
     #time.sleep(3540)
@@ -162,6 +165,9 @@ def DeployFunction(intent_class):
         settings = loadconfig("./Settings/configuration.json")
         settings["colour"] = "RED"
         saveconfig("./Settings/configuration.json", settings)
+    
+    elif intent_class == "sherlock":
+        sherlock()
 
 # Website functions
 

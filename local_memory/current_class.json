@@ -1,1 +1,19 @@
-{"response": "Hello!", "intent_class": {"tag": "greet", "patterns": ["Hi", "Hello", "Hey", "Greetings"], "responses": ["Hello!", "Hi there!", "Hey!", "Greetings!"], "context": "small-talk"}}
+{
+  "response": "Hello!",
+  "intent_class": {
+    "tag": "greet",
+    "patterns": [
+      "Hi",
+      "Hello",
+      "Hey",
+      "Greetings"
+    ],
+    "responses": [
+      "Hello!",
+      "Hi there!",
+      "Hey!",
+      "Greetings!"
+    ],
+    "context": "small-talk"
+  }
+}

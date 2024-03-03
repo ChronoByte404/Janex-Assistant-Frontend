@@ -17,7 +17,7 @@ class MyWindow(QMainWindow):
 
         self.text_edit = QTextEdit(self)
         self.text_edit.setGeometry(10, 10, 580, 300)
-        self.text_edit.setStyleSheet("background-color: black; color: white;")
+        self.text_edit.setStyleSheet("background-color: black; color: grey;")
         self.text_edit.setReadOnly(True)  # Set read-only
 
         self.input_field = QLineEdit(self)

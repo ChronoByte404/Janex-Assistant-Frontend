@@ -51,6 +51,7 @@ The Janex Assistant is capable of performing various tasks and providing assista
     - Help with technology
     - Update GitHub repository
     - Download GitHub updates
+    - Search for any username through a number of social medias (via Sherlock)
 
 - **Engaging in Small Talk:**
     - Greet
@@ -92,3 +93,8 @@ The Janex NLU Personal Assistant Installer script automates the installation pro
    - The script downloads the Janex application from GitHub, extracts it to the specified directory, and installs dependencies.
 5. **Completion:**
    - Upon successful installation, a message box confirms the completion.
+
+### Credit where credit's due
+
+1. This program's AI runs via the JanexUltimate library, which can be found via my profile.
+2. An integrated tool which is based on Sherlock, many thanks to https://github.com/sherlock-project/sherlock

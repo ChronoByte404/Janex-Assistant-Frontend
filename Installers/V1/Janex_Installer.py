@@ -19,7 +19,7 @@ class Downloader:
         for cmd in commands:
             subprocess.run(cmd, shell=True, executable="/bin/bash")
         
-        os.system(". ~/.Janex-Assistant-Frontend/Virtual_Environment/NLU_VE/bin/activate && python3 ~/.Janex-Assistant-Frontend/Virtual_Environment/NLU_VE/bin/pip install -r ~/.Janex-Assistant-Frontend/Setup/requirements.txt")
+        os.system(". ~/.Janex-Assistant-Frontend/Virtual_Environment/NLU_VE/bin/activate && python3 -m pip install -r ~/.Janex-Assistant-Frontend/Setup/requirements.txt")
 
     def create_desktop_entry(self):
         if sys.platform.startswith('linux'):

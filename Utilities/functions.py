@@ -179,6 +179,18 @@ def DeployFunction(intent_class):
             usrinput = usrinput.replace(pattern, "")
         
         run_cprogram(f"./Scripts/sherlock {usrinput}")
+        names = usrinput.split(" ")
+        # get the final name, call it final_name
+        if len(names) > 1:
+            listnames = []
+            final_name = names[-1]
+            for name in names:
+                if name != final_name:
+                    listnames.append(f"{name}, ")
+            names = names[:1]
+            tts(f"Social media scan for {listnames} and {final_name} completed.")
+        else:
+            tts(f"Social media scan for {usrinput} completed.")
 
 # Website functions
 
